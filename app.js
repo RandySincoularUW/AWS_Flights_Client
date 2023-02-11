@@ -102,11 +102,25 @@ const getNearbyAirports = async function ()  {
         // Make sure to use backticks when defining the route parameter
         console.log("app.js:  getNearbyAirports() calling flights api ...")
 
-        // Hardcoded lat/lng
+        // Test: use localhost
+        // 11-Feb-23 Tried this again.  Results:
+        // Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote 
+        // resource at http://localhost:8000/nearbyAirports/43.0637,-89.2043. 
+        // (Reason: CORS request did not succeed). Status code: (null).
         // const api_url = `http://localhost:8000/nearbyAirports/` + `${43.0637},${-89.2043}`
 
+        // Test: Using 127.0.0.1:8000
+        // Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote 
+        // resource at http://127.0.0.1:8000/nearbyAirports/43.0637,-89.2043. 
+        // (Reason: CORS request did not succeed). Status code: (null).
+
+        // If we add: 'http://127.0.0.1/?' to the allowed origins on the server side, this
+        // works!
+        const api_url = `http://127.0.0.1:8000/nearbyAirports/` + `${43.0637},${-89.2043}`
+
         // Get latitude, longitude from local storage variables
-        const api_url = `http://44.197.70.59:8000/nearbyAirports/` + `${myLatitude},${myLongitude}`
+        // 11-Feb-23 comment to test using localhost again
+        // const api_url = `http://44.197.70.59:8000/nearbyAirports/` + `${myLatitude},${myLongitude}`
 
         console.log("app.js: getNearbyAirports() api_url: " + api_url)
        
