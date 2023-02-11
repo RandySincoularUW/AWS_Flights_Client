@@ -30,6 +30,9 @@ const tableBody = document.getElementById('table_body')
 
 // Function to get current flights
 // for a specific airport
+// 10-Feb-23 Calling this function 'may, sometime' causes duplicate records to be written
+//           to the database
+
 const getFlights = async function (airportCode)  {
 
     try {
@@ -85,9 +88,6 @@ const getFlights = async function (airportCode)  {
     }
 
 }  // end getFlights
-
-// +++++++++++++++++++
-// 13-Dec-22 Comment out. Moved to server.js
 
 // // Get nearby airport(s)
 
@@ -146,9 +146,6 @@ const getNearbyAirports = async function ()  {
     }
 
 }  // end getNearByAirport()
-
-// end 13-Dec-22
-// +++++++++++++++++++++++++++++++++
 
 console.log("app.js: calling: getNearbyAirports() ....")
 getNearbyAirports()
@@ -247,10 +244,6 @@ const populateFlightTable = (json) => {
         } // end if/else
 
 } // end populateFlightTable
-
-
-
-
 
 // Get the nearby airport results
 // ------------------------------

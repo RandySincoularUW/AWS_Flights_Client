@@ -26,8 +26,7 @@ flightURL = 'https://airlabs.co/api/v9/flights?api_key=' + myFlightsAPIKey + '&a
             async function showFlights() {
                 scriptName = "mapping.js: showFlights(): "
                 console.log("in "+ scriptName)
-
-                // 10-Dec-22 Added try/catch
+                console.log("  **flightURL: " + flightURL)
 
                 try {
                     const response = await fetch(flightURL)
@@ -66,40 +65,5 @@ flightURL = 'https://airlabs.co/api/v9/flights?api_key=' + myFlightsAPIKey + '&a
                 }
 
             }  // end showFlights()
-
-
-            async function showFlights_save() {
-
-                scriptName = "mapping.js: showFlights(): "
-                const response = await fetch(flightURL);
-                const reportData = await response.json();
-                console.log(scriptName + " in " + scriptName)
-
-                var flightLayer = new L.geoJSON(reportData,{
-
-                    onEachFeature: function (feature,flightLayer) {
-
-                    console.log(scriptName + " feature.properties: " + feature.properties)
-                    console.log(scriptName + " flightLayer: " + flightLayer)
-
-                    if(feature.properties && feature.properties.name) {
-                        var popupContent = '<table>';
-                        for (var p in feature.properties) {
-                            popupContent +='<tr><td>' + p + ':</td><td><b>' + feature.properties[p] + '</b></td></tr>';
-                        }
-                        popupContent += '</table>';
-                        layer.bindPopup(popupContent);
-                    }
-                    },
-                    pointToLayer: function(feature, latlng) {
-                    return L.marker(latlng, {icon: iconByDisasterType(feature)})
-
-                    }
-                });    
-                        
-                //reportLayer.addTo(mymap).bindPopup(feature.properties.name);
-                flightLayer.addTo(mymap);
-
-            }  // end getFlights()
 
     console.log("mapping.js: done with mapping.js() ...")
