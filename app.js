@@ -1,4 +1,5 @@
-
+// 11-Feb-23 	No longer need to use hardcoded server address; 
+//				Modified server side, allowed origins to accept: 127.0.0.1/?
 
 console.log("app.js()  starting app.js() ... ")
 
@@ -55,7 +56,11 @@ const getFlights = async function (airportCode)  {
 
         console.log("app.js: in getFlights() ...airport code: " + airportCode)
 
-        const api_url = 'http://44.197.70.59:8000/flights/' + `${airportCode}`
+        // 12-Feb-23 Need to use Elastic IP Address
+       const api_url = 'http://44.197.70.59:8000/flights/' + `${airportCode}`
+
+        // This does not work, even if we include it in the allowedOrigin list
+        // const api_url = 'http://127.0.0.1:8000/flights/' + `${airportCode}`
        
         console.log("app.js: getFlights() api_url: " + api_url)
        
@@ -115,8 +120,11 @@ const getNearbyAirports = async function ()  {
         // (Reason: CORS request did not succeed). Status code: (null).
 
         // If we add: 'http://127.0.0.1/?' to the allowed origins on the server side, this
-        // works!
-        const api_url = `http://127.0.0.1:8000/nearbyAirports/` + `${43.0637},${-89.2043}`
+        // Does Not work!
+        // const api_url = `http://127.0.0.1:8000/nearbyAirports/` + `${43.0637},${-89.2043}`
+        
+        // Need to use the Elastic IP Address
+        const api_url = `http://44.197.70.59:8000/nearbyAirports/` + `${myLatitude},${myLongitude}`
 
         // Get latitude, longitude from local storage variables
         // 11-Feb-23 comment to test using localhost again
